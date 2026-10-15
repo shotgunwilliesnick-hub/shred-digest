@@ -134,7 +134,7 @@
     .base-change { color: var(--muted); font: 700 1.18rem/1 "Barlow Condensed", sans-serif; white-space: nowrap; }
     .base-change b { display: inline-block; min-width: 24px; margin-right: 3px; color: inherit; font: 700 .58rem/1 "Barlow", sans-serif; letter-spacing: .02em; text-align: right; text-transform: uppercase; }
     .base-change.up { color: var(--good); }
-    .base-num { color: var(--muted); font: 600 .78rem/1 "Barlow", sans-serif; }
+    .base-num { color: var(--ink); font: 700 1.44rem/1 "Barlow Condensed", sans-serif; }
     .day-cell { height: 117px; display: grid; grid-template-rows: 58px auto; align-items: end; padding: 5px 3px 7px; }
     .bar-box { height: 54px; display: flex; align-items: end; justify-content: center; position: relative; }
     .bar { width: min(30px, 62%); min-height: 2px; background: linear-gradient(180deg, var(--snow-top), var(--snow)); border-radius: 3px 3px 0 0; position: relative; }
@@ -277,7 +277,7 @@
     </section>
 
     <footer>
-      <p><strong>Base col:</strong> NEW (4PM-5AM) / 24h (5AM-5AM) in green, base depth below, SNOTEL. · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
+      <p><strong>Base:</strong> total measured snow depth · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
       <p><strong>Roads:</strong> CDOT alerts · <span id="footer-date"></span></p>
       <p class="refresh-stamp" id="refresh-stamp"></p>
     </footer>
@@ -336,7 +336,7 @@
         '<div class="metric"><strong>'+deepest.base+'\"</strong><span>deepest measured base · '+esc(deepest.name)+'</span></div>'+
         '<div class="metric"><strong>'+formatSnow(totals[0].total)+'\"</strong><span>largest 10-day signal · '+esc(totals[0].name)+'</span></div>';
 
-      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col">NEW/24h<br><span class="unit">Base</span></th>'+ 
+      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col">Base</th>'+ 
         data.days.map(function (day, i) {
           var bits = day.split(' ');
           return '<th class="day-col"><span class="date-head"><b>'+esc(bits[0])+(i > 7 ? '<sup>*</sup>' : '')+'</b>'+esc(bits[1])+'</span></th>';
@@ -344,7 +344,7 @@
 
       document.getElementById('forecast-body').innerHTML = data.resorts.map(function (resort) {
         return '<tr><td class="resort-name"><strong>'+esc(resort.name)+'</strong><small>10-day: '+formatSnow(resort.cells.reduce(function(a,b){return a+b;},0))+'\"</small></td>'+
-          '<td><div class="base-stack"><span class="base-change '+(resort.overnight > 0 ? 'up' : '')+'"><b>ON</b>'+formatBaseChange(resort.overnight)+'</span><span class="base-change '+(resort.h24 > 0 ? 'up' : '')+'"><b>24h</b>'+formatBaseChange(resort.h24)+'</span><span class="base-num">'+resort.base+'″</span></div></td>'+
+          '<td><span class="base-num">'+resort.base+'″</span></td>'+
 
           resort.cells.map(function (value, i) {
             var missing = value === null || value === undefined;
