@@ -336,7 +336,7 @@
         '<div class="metric"><strong>'+deepest.base+'\"</strong><span>deepest measured base · '+esc(deepest.name)+'</span></div>'+
         '<div class="metric"><strong>'+formatSnow(totals[0].total)+'\"</strong><span>largest 10-day signal · '+esc(totals[0].name)+'</span></div>';
 
-      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col">Base<br><span class="unit">NEW/24h</span></th>'+ 
+      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col">NEW/24h<br><span class="unit">Base</span></th>'+ 
         data.days.map(function (day, i) {
           var bits = day.split(' ');
           return '<th class="day-col"><span class="date-head"><b>'+esc(bits[0])+(i > 7 ? '<sup>*</sup>' : '')+'</b>'+esc(bits[1])+'</span></th>';
