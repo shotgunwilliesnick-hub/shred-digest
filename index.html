@@ -117,7 +117,10 @@
     th:last-child, td:last-child { border-right: 0; }
     thead th { background: var(--surface-2); height: 72px; vertical-align: bottom; padding: 9px 4px; }
     .resort-col { width: 142px; text-align: left; padding-left: 13px; }
-    .base-col { width: 68px; font-size: .72rem; white-space: nowrap; }
+    .base-col { width: 68px; white-space: nowrap; }
+    .base-head { display: grid; justify-items: center; gap: 2px; line-height: 1; }
+    .base-head strong { color: var(--accent); font-size: .66rem; letter-spacing: -.01em; }
+    .base-head small { color: var(--muted); font-size: .64rem; font-weight: 600; }
     .day-col { width: calc((100% - 346px) / 10); }
     .ots-col, .sf-col { width: 68px; }
     .date-head { display: block; font-size: .83rem; line-height: 1.06; }
@@ -131,10 +134,10 @@
     .ots-num, .sf-num { font-size: 1.44rem; font-weight: 700; line-height: 1; }
     .unit { display: block; margin-top: 3px; color: var(--muted); font: 600 .65rem "Barlow", sans-serif; }
     .base-stack { display: grid; justify-items: center; gap: 5px; }
-    .base-change { color: var(--muted); font: 700 1.18rem/1 "Barlow Condensed", sans-serif; white-space: nowrap; }
-    .base-change b { display: inline-block; min-width: 24px; margin-right: 3px; color: inherit; font: 700 .58rem/1 "Barlow", sans-serif; letter-spacing: .02em; text-align: right; text-transform: uppercase; }
-    .base-change.up { color: var(--good); }
-    .base-num { color: var(--ink); font: 700 1.44rem/1 "Barlow Condensed", sans-serif; }
+    .base-change { color: var(--good); font: 700 1.08rem/1 "Barlow Condensed", sans-serif; white-space: nowrap; }
+    .base-change b { display: inline-block; min-width: 24px; margin-right: 3px; color: inherit; font: 700 .55rem/1 "Barlow", sans-serif; letter-spacing: .02em; text-align: right; text-transform: uppercase; }
+    .base-num { color: var(--muted); font: 600 .88rem/1 "Barlow Condensed", sans-serif; white-space: nowrap; }
+    .base-num b { margin-right: 3px; font: 600 .52rem/1 "Barlow", sans-serif; letter-spacing: .02em; text-transform: uppercase; }
     .day-cell { height: 117px; display: grid; grid-template-rows: 58px auto; align-items: end; padding: 5px 3px 7px; }
     .bar-box { height: 54px; display: flex; align-items: end; justify-content: center; position: relative; }
     .bar { width: min(30px, 62%); min-height: 2px; background: linear-gradient(180deg, var(--snow-top), var(--snow)); border-radius: 3px 3px 0 0; position: relative; }
@@ -277,7 +280,7 @@
     </section>
 
     <footer>
-      <p><strong>Base:</strong> total measured snow depth · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
+      <p><strong>NEW/24h:</strong> overnight snowfall / snowfall reported in the last 24 hours · <strong>Base:</strong> total measured snow depth · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
       <p><strong>Roads:</strong> CDOT alerts · <span id="footer-date"></span></p>
       <p class="refresh-stamp" id="refresh-stamp"></p>
     </footer>
@@ -306,7 +309,7 @@
         if (value === null || value === undefined || value === '') return '—';
         var number = Number(value);
         if (!isFinite(number)) return '—';
-        return (number > 0 ? '+' : '') + (Number.isInteger(number) ? number : number.toFixed(1)) + '″';
+        return (number >= 0 ? '+' : '') + (Number.isInteger(number) ? number : number.toFixed(1)) + '″';
       }
 
       function icon(kind) {
@@ -336,7 +339,7 @@
         '<div class="metric"><strong>'+deepest.base+'\"</strong><span>deepest measured base · '+esc(deepest.name)+'</span></div>'+
         '<div class="metric"><strong>'+formatSnow(totals[0].total)+'\"</strong><span>largest 10-day signal · '+esc(totals[0].name)+'</span></div>';
 
-      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col">Base</th>'+ 
+      document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col"><span class="base-head"><strong>NEW/24h</strong><small>Base</small></span></th>'+ 
         data.days.map(function (day, i) {
           var bits = day.split(' ');
           return '<th class="day-col"><span class="date-head"><b>'+esc(bits[0])+(i > 7 ? '<sup>*</sup>' : '')+'</b>'+esc(bits[1])+'</span></th>';
@@ -344,7 +347,7 @@
 
       document.getElementById('forecast-body').innerHTML = data.resorts.map(function (resort) {
         return '<tr><td class="resort-name"><strong>'+esc(resort.name)+'</strong><small>10-day: '+formatSnow(resort.cells.reduce(function(a,b){return a+b;},0))+'\"</small></td>'+
-          '<td><span class="base-num">'+resort.base+'″</span></td>'+
+          '<td><div class="base-stack"><span class="base-change"><b>NEW</b>'+formatBaseChange(Math.max(0, Number(resort.overnight) || 0))+'</span><span class="base-change"><b>24h</b>'+formatBaseChange(Math.max(0, Number(resort.h24) || 0))+'</span><span class="base-num"><b>Base</b>'+resort.base+'″</span></div></td>'+
 
           resort.cells.map(function (value, i) {
             var missing = value === null || value === undefined;
