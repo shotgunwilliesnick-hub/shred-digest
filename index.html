@@ -172,6 +172,19 @@
     .tag.chain-law { color: var(--warn); }
     .tag.info { color: var(--accent); }
     .tag.clear { color: var(--good); }
+    .stake-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+    .stake { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .stake-photo { position: relative; aspect-ratio: 16 / 9; background: var(--surface-2); }
+    .stake-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .stake-num { position: absolute; top: 8px; left: 8px; background: rgba(6, 17, 30, .8); color: #fff; font: 700 .82rem/1 "Barlow Condensed", sans-serif; letter-spacing: .04em; padding: 4px 8px; border-radius: 4px; }
+    .stake-nofeed { display: flex; align-items: center; justify-content: center; height: 100%; padding: 16px; text-align: center; color: var(--muted); font-size: .88rem; }
+    .stake-body { padding: 13px 15px 15px; display: grid; gap: 6px; justify-items: start; }
+    .stake-body h3 { margin: 0; font-size: 1.28rem; line-height: 1.05; }
+    .stake-label { color: var(--muted); font-size: .86rem; }
+    .stake-refresh { font-size: .66rem; line-height: 1.5; letter-spacing: .03em; padding: 2px 8px; border: 1px solid currentColor; border-radius: 999px; font-weight: 700; color: var(--good); }
+    .stake-note { color: var(--warn); font-size: .8rem; }
+    .stake-link { color: var(--accent); font-weight: 700; font-size: .86rem; text-decoration: none; }
+    .stake-link:hover { text-decoration: underline; }
     footer { display: flex; justify-content: space-between; align-items: start; gap: 30px; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
     footer p { margin: 0; }
     footer strong { color: var(--ink); }
@@ -253,6 +266,7 @@
     <nav class="view-tabs" aria-label="Report pages">
       <button type="button" id="tab-resorts" aria-controls="resorts-panel" aria-selected="true">Resorts</button>
       <button type="button" id="tab-roads" aria-controls="roads-panel" aria-selected="false">Roads &amp; Passes</button>
+      <button type="button" id="tab-stakes" aria-controls="stakes-panel" aria-selected="false">❄ Snow Stakes</button>
     </nav>
 
     <section id="resorts-panel" class="panel" aria-labelledby="tab-resorts">
@@ -280,6 +294,14 @@
       <div class="road-list" id="road-list"></div>
     </section>
 
+    <section id="stakes-panel" class="panel" aria-labelledby="tab-stakes" hidden>
+      <div class="section-head">
+        <h2>Snow Stakes</h2>
+        <p>Latest snow-stake photos in resort order · refreshes with each digest run, first pull 5 AM</p>
+      </div>
+      <div class="stake-grid" id="stake-grid"></div>
+    </section>
+
     <footer>
       <p><strong>NEW/24h:</strong> overnight snowfall / snowfall reported in the last 24 hours · <strong>Base:</strong> total measured snow depth · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
       <p><strong>Roads:</strong> CDOT alerts · <span id="footer-date"></span></p>
@@ -289,7 +311,7 @@
 
   <!-- DIGEST_DATA_START -->
   <script id="digest-data" type="application/json">
-{"date":"Sunday, Oct 18","refreshed_at":"1:00 PM MT on Sun, Oct 18","days":["Sun 10/18","Mon 10/19","Tue 10/20","Wed 10/21","Thu 10/22","Fri 10/23","Sat 10/24","Sun 10/25","Mon 10/26","Tue 10/27"],"resorts":[{"name":"Copper Mtn","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.1,0.4,0.0,0.0,0.0],"sf6d":0.4,"ots8d":0.1,"wx":[{"hi":57,"lo":32,"icon":"cloud"},{"hi":52,"lo":34,"icon":"cloud"},{"hi":53,"lo":35,"icon":"sun"},{"hi":57,"lo":36,"icon":"cloud"},{"hi":58,"lo":39,"icon":"cloud"},{"hi":55,"lo":32,"icon":"partly"},{"hi":54,"lo":29,"icon":"sun"},{"hi":52,"lo":32,"icon":"cloud"},{"hi":47,"lo":33,"icon":"cloud"},{"hi":55,"lo":32,"icon":"sun"}]},{"name":"Arapahoe Basin","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.1,3.0,0.0,0.0,0.0],"sf6d":0.0,"ots8d":1.8,"wx":[{"hi":51,"lo":28,"icon":"cloud"},{"hi":46,"lo":31,"icon":"cloud"},{"hi":50,"lo":32,"icon":"rain"},{"hi":52,"lo":32,"icon":"cloud"},{"hi":53,"lo":35,"icon":"cloud"},{"hi":51,"lo":30,"icon":"sun"},{"hi":48,"lo":27,"icon":"sun"},{"hi":44,"lo":28,"icon":"cloud"},{"hi":42,"lo":29,"icon":"cloud"},{"hi":52,"lo":28,"icon":"sun"}]},{"name":"Loveland","base":1,"base_chg":0,"overnight":0,"h24":4.0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.6,1.4,0.0,0.1,0.0],"sf6d":0.8,"ots8d":1.1,"wx":[{"hi":52,"lo":28,"icon":"sun"},{"hi":47,"lo":30,"icon":"cloud"},{"hi":50,"lo":30,"icon":"cloud"},{"hi":53,"lo":32,"icon":"cloud"},{"hi":54,"lo":35,"icon":"cloud"},{"hi":52,"lo":28,"icon":"partly"},{"hi":49,"lo":25,"icon":"sun"},{"hi":45,"lo":27,"icon":"cloud"},{"hi":44,"lo":29,"icon":"cloud"},{"hi":51,"lo":27,"icon":"sun"}]},{"name":"Winter Park","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":0.4,"ots8d":0.6,"wx":[{"hi":58,"lo":32,"icon":"sun"},{"hi":54,"lo":38,"icon":"cloud"},{"hi":55,"lo":38,"icon":"sun"},{"hi":60,"lo":38,"icon":"cloud"},{"hi":62,"lo":43,"icon":"cloud"},{"hi":60,"lo":34,"icon":"partly"},{"hi":55,"lo":32,"icon":"sun"},{"hi":54,"lo":35,"icon":"cloud"},{"hi":51,"lo":35,"icon":"cloud"},{"hi":58,"lo":35,"icon":"sun"}]},{"name":"Eldora","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.7,0.0,0.0,0.0],"sf6d":0.8,"ots8d":0.6,"wx":[{"hi":59,"lo":37,"icon":"sun"},{"hi":53,"lo":36,"icon":"cloud"},{"hi":58,"lo":37,"icon":"rain"},{"hi":59,"lo":37,"icon":"cloud"},{"hi":61,"lo":42,"icon":"cloud"},{"hi":61,"lo":35,"icon":"partly"},{"hi":50,"lo":30,"icon":"sun"},{"hi":50,"lo":34,"icon":"cloud"},{"hi":49,"lo":34,"icon":"cloud"},{"hi":56,"lo":33,"icon":"sun"}]},{"name":"Wolf Creek","base":1,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,1.7,0.0,0.0,0.4,0.0],"sf6d":2.4,"ots8d":1.2,"wx":[{"hi":44,"lo":29,"icon":"cloud"},{"hi":44,"lo":34,"icon":"cloud"},{"hi":44,"lo":34,"icon":"rain"},{"hi":48,"lo":34,"icon":"cloud"},{"hi":40,"lo":36,"icon":"cloud"},{"hi":42,"lo":30,"icon":"rain"},{"hi":48,"lo":31,"icon":"partly"},{"hi":38,"lo":33,"icon":"snow"},{"hi":40,"lo":26,"icon":"snow"},{"hi":45,"lo":24,"icon":"sun"}]},{"name":"Breckenridge","base":3,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.3,0.0,0.0,0.0],"sf6d":0.8,"ots8d":0.7,"wx":[{"hi":58,"lo":30,"icon":"cloud"},{"hi":52,"lo":34,"icon":"cloud"},{"hi":55,"lo":34,"icon":"sun"},{"hi":58,"lo":35,"icon":"sun"},{"hi":59,"lo":39,"icon":"cloud"},{"hi":56,"lo":32,"icon":"sun"},{"hi":53,"lo":28,"icon":"sun"},{"hi":51,"lo":33,"icon":"cloud"},{"hi":48,"lo":32,"icon":"cloud"},{"hi":57,"lo":31,"icon":"sun"}]},{"name":"Keystone","base":1,"base_chg":1,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.1,1.2,0.0,0.0,0.0],"sf6d":0.4,"ots8d":1.0,"wx":[{"hi":55,"lo":31,"icon":"cloud"},{"hi":51,"lo":34,"icon":"cloud"},{"hi":53,"lo":35,"icon":"sun"},{"hi":56,"lo":35,"icon":"cloud"},{"hi":57,"lo":38,"icon":"cloud"},{"hi":54,"lo":31,"icon":"partly"},{"hi":53,"lo":29,"icon":"sun"},{"hi":51,"lo":31,"icon":"cloud"},{"hi":46,"lo":32,"icon":"cloud"},{"hi":54,"lo":31,"icon":"sun"}]},{"name":"Vail","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.2,"wx":[{"hi":61,"lo":33,"icon":"sun"},{"hi":56,"lo":40,"icon":"cloud"},{"hi":59,"lo":39,"icon":"rain"},{"hi":63,"lo":40,"icon":"cloud"},{"hi":65,"lo":43,"icon":"cloud"},{"hi":61,"lo":35,"icon":"rain"},{"hi":60,"lo":33,"icon":"sun"},{"hi":58,"lo":36,"icon":"cloud"},{"hi":55,"lo":37,"icon":"cloud"},{"hi":62,"lo":35,"icon":"sun"}]},{"name":"Beaver Creek","base":1,"base_chg":0,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.1,"wx":[{"hi":60,"lo":32,"icon":"sun"},{"hi":58,"lo":38,"icon":"partly"},{"hi":60,"lo":40,"icon":"sun"},{"hi":63,"lo":40,"icon":"sun"},{"hi":63,"lo":44,"icon":"cloud"},{"hi":60,"lo":37,"icon":"partly"},{"hi":58,"lo":33,"icon":"sun"},{"hi":57,"lo":36,"icon":"cloud"},{"hi":55,"lo":38,"icon":"cloud"},{"hi":59,"lo":36,"icon":"sun"}]},{"name":"Steamboat","base":2,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.0,"wx":[{"hi":62,"lo":35,"icon":"sun"},{"hi":60,"lo":42,"icon":"sun"},{"hi":62,"lo":43,"icon":"cloud"},{"hi":67,"lo":43,"icon":"sun"},{"hi":66,"lo":48,"icon":"cloud"},{"hi":60,"lo":41,"icon":"rain"},{"hi":57,"lo":36,"icon":"sun"},{"hi":61,"lo":38,"icon":"partly"},{"hi":58,"lo":41,"icon":"cloud"},{"hi":62,"lo":39,"icon":"sun"}]},{"name":"Brighton","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.8,0.4,0.0,0.0,0.0],"sf6d":2.0,"ots8d":2.4,"wx":[{"hi":51,"lo":35,"icon":"sun"},{"hi":47,"lo":38,"icon":"cloud"},{"hi":51,"lo":38,"icon":"rain"},{"hi":56,"lo":38,"icon":"sun"},{"hi":49,"lo":38,"icon":"sun"},{"hi":40,"lo":31,"icon":"rain"},{"hi":45,"lo":28,"icon":"sun"},{"hi":49,"lo":33,"icon":"sun"},{"hi":50,"lo":34,"icon":"sun"},{"hi":52,"lo":33,"icon":"sun"}]},{"name":"Snowbird","base":1,"base_chg":-2,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.2,0.5,0.0,0.0,0.0],"sf6d":3.1,"ots8d":3.6,"wx":[{"hi":53,"lo":39,"icon":"sun"},{"hi":51,"lo":40,"icon":"cloud"},{"hi":53,"lo":41,"icon":"rain"},{"hi":58,"lo":42,"icon":"sun"},{"hi":53,"lo":41,"icon":"sun"},{"hi":42,"lo":34,"icon":"snow"},{"hi":46,"lo":29,"icon":"sun"},{"hi":49,"lo":35,"icon":"sun"},{"hi":53,"lo":37,"icon":"sun"},{"hi":55,"lo":38,"icon":"sun"}]}],"roads":[{"label":"I-70 \u2014 Eisenhower Tunnel corridor","alerts":[]},{"label":"Vail Pass (I-70, MP 176\u2013195)","alerts":[]},{"label":"US-6 \u2014 Loveland Pass","alerts":["[CLOSURE] US 6 eastbound: Road closed. \u2014 2 miles east of the Floyd Hill area"]},{"label":"US-40 \u2014 Berthoud Pass","alerts":[]},{"label":"US-40 \u2014 Rabbit Ears Pass","alerts":[]},{"label":"CO-9 \u2014 Hoosier Pass","alerts":[]},{"label":"CO-119 \u2014 Boulder Canyon (Eldora)","alerts":[]},{"label":"US-160 \u2014 Wolf Creek Pass","alerts":[]},{"label":"SR-190 \u2014 Big Cottonwood (Brighton/Solitude)","alerts":["No status posts in feed as of 1 PM MT Sun 10/18 \u2014 road open, no planned closures or traction restrictions (UDOT default rule); canyon-mouth sign shows travel times only"]},{"label":"SR-210 \u2014 Little Cottonwood (Snowbird/Alta)","alerts":["No status posts in feed as of 1 PM MT Sun 10/18 \u2014 road open, no planned closures or traction restrictions (UDOT default rule)"]}]}
+{"date":"Sunday, Oct 18","refreshed_at":"3:45 PM MT on Sun, Oct 18","days":["Sun 10/18","Mon 10/19","Tue 10/20","Wed 10/21","Thu 10/22","Fri 10/23","Sat 10/24","Sun 10/25","Mon 10/26","Tue 10/27"],"resorts":[{"name":"Copper Mtn","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.1,0.4,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.1,"wx":[{"hi":57,"lo":32,"icon":"sun"},{"hi":53,"lo":35,"icon":"sun"},{"hi":53,"lo":34,"icon":"cloud"},{"hi":57,"lo":36,"icon":"cloud"},{"hi":58,"lo":39,"icon":"cloud"},{"hi":55,"lo":32,"icon":"partly"},{"hi":54,"lo":29,"icon":"sun"},{"hi":52,"lo":32,"icon":"cloud"},{"hi":47,"lo":33,"icon":"cloud"},{"hi":55,"lo":32,"icon":"sun"}]},{"name":"Arapahoe Basin","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.3,1.5,0.0,0.0,0.0],"sf6d":0.0,"ots8d":1.8,"wx":[{"hi":52,"lo":28,"icon":"sun"},{"hi":47,"lo":32,"icon":"sun"},{"hi":49,"lo":32,"icon":"cloud"},{"hi":52,"lo":32,"icon":"cloud"},{"hi":53,"lo":35,"icon":"cloud"},{"hi":51,"lo":30,"icon":"sun"},{"hi":48,"lo":27,"icon":"sun"},{"hi":44,"lo":28,"icon":"cloud"},{"hi":42,"lo":29,"icon":"cloud"},{"hi":52,"lo":28,"icon":"sun"}]},{"name":"Loveland","base":1,"base_chg":0,"overnight":0,"h24":4.0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.6,1.4,0.0,0.1,0.0],"sf6d":0.0,"ots8d":1.1,"wx":[{"hi":52,"lo":28,"icon":"sun"},{"hi":48,"lo":29,"icon":"sun"},{"hi":50,"lo":31,"icon":"cloud"},{"hi":53,"lo":32,"icon":"cloud"},{"hi":54,"lo":35,"icon":"cloud"},{"hi":52,"lo":28,"icon":"partly"},{"hi":49,"lo":25,"icon":"sun"},{"hi":45,"lo":27,"icon":"cloud"},{"hi":44,"lo":29,"icon":"cloud"},{"hi":51,"lo":27,"icon":"sun"}]},{"name":"Winter Park","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.7,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.6,"wx":[{"hi":58,"lo":32,"icon":"sun"},{"hi":55,"lo":38,"icon":"sun"},{"hi":55,"lo":39,"icon":"cloud"},{"hi":60,"lo":38,"icon":"cloud"},{"hi":62,"lo":43,"icon":"cloud"},{"hi":60,"lo":34,"icon":"partly"},{"hi":55,"lo":32,"icon":"sun"},{"hi":54,"lo":35,"icon":"cloud"},{"hi":51,"lo":35,"icon":"cloud"},{"hi":58,"lo":35,"icon":"sun"}]},{"name":"Eldora","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.7,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.6,"wx":[{"hi":60,"lo":37,"icon":"sun"},{"hi":54,"lo":35,"icon":"sun"},{"hi":58,"lo":40,"icon":"cloud"},{"hi":59,"lo":37,"icon":"cloud"},{"hi":61,"lo":42,"icon":"cloud"},{"hi":61,"lo":35,"icon":"partly"},{"hi":50,"lo":30,"icon":"sun"},{"hi":50,"lo":34,"icon":"cloud"},{"hi":49,"lo":34,"icon":"cloud"},{"hi":56,"lo":33,"icon":"sun"}]},{"name":"Wolf Creek","base":1,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,1.7,0.0,0.0,0.4,0.0],"sf6d":4.7,"ots8d":1.2,"wx":[{"hi":46,"lo":29,"icon":"sun"},{"hi":44,"lo":34,"icon":"sun"},{"hi":44,"lo":34,"icon":"rain"},{"hi":48,"lo":34,"icon":"cloud"},{"hi":40,"lo":36,"icon":"cloud"},{"hi":42,"lo":30,"icon":"rain"},{"hi":48,"lo":31,"icon":"partly"},{"hi":38,"lo":33,"icon":"snow"},{"hi":40,"lo":26,"icon":"snow"},{"hi":45,"lo":24,"icon":"sun"}]},{"name":"Breckenridge","base":3,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.3,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.7,"wx":[{"hi":58,"lo":30,"icon":"partly"},{"hi":54,"lo":34,"icon":"cloud"},{"hi":55,"lo":35,"icon":"cloud"},{"hi":58,"lo":35,"icon":"sun"},{"hi":59,"lo":39,"icon":"cloud"},{"hi":56,"lo":32,"icon":"sun"},{"hi":53,"lo":28,"icon":"sun"},{"hi":51,"lo":33,"icon":"cloud"},{"hi":48,"lo":32,"icon":"cloud"},{"hi":57,"lo":31,"icon":"sun"}]},{"name":"Keystone","base":1,"base_chg":1,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.1,1.2,0.0,0.0,0.0],"sf6d":0.0,"ots8d":1.0,"wx":[{"hi":55,"lo":31,"icon":"sun"},{"hi":52,"lo":35,"icon":"sun"},{"hi":52,"lo":33,"icon":"cloud"},{"hi":56,"lo":35,"icon":"cloud"},{"hi":57,"lo":38,"icon":"cloud"},{"hi":54,"lo":31,"icon":"partly"},{"hi":53,"lo":29,"icon":"sun"},{"hi":51,"lo":31,"icon":"cloud"},{"hi":46,"lo":32,"icon":"cloud"},{"hi":54,"lo":31,"icon":"sun"}]},{"name":"Vail","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.2,"wx":[{"hi":61,"lo":33,"icon":"sun"},{"hi":58,"lo":38,"icon":"sun"},{"hi":59,"lo":40,"icon":"cloud"},{"hi":63,"lo":40,"icon":"cloud"},{"hi":65,"lo":43,"icon":"cloud"},{"hi":61,"lo":35,"icon":"rain"},{"hi":60,"lo":33,"icon":"sun"},{"hi":58,"lo":36,"icon":"cloud"},{"hi":55,"lo":37,"icon":"cloud"},{"hi":62,"lo":35,"icon":"sun"}]},{"name":"Beaver Creek","base":1,"base_chg":0,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.1,"wx":[{"hi":60,"lo":32,"icon":"sun"},{"hi":59,"lo":39,"icon":"sun"},{"hi":60,"lo":40,"icon":"rain"},{"hi":63,"lo":40,"icon":"sun"},{"hi":63,"lo":44,"icon":"cloud"},{"hi":60,"lo":37,"icon":"partly"},{"hi":58,"lo":33,"icon":"sun"},{"hi":57,"lo":36,"icon":"cloud"},{"hi":55,"lo":38,"icon":"cloud"},{"hi":59,"lo":36,"icon":"sun"}]},{"name":"Steamboat","base":2,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.0,"wx":[{"hi":63,"lo":35,"icon":"sun"},{"hi":63,"lo":42,"icon":"sun"},{"hi":62,"lo":45,"icon":"cloud"},{"hi":67,"lo":43,"icon":"sun"},{"hi":66,"lo":48,"icon":"cloud"},{"hi":60,"lo":41,"icon":"rain"},{"hi":57,"lo":36,"icon":"sun"},{"hi":61,"lo":38,"icon":"partly"},{"hi":58,"lo":41,"icon":"cloud"},{"hi":62,"lo":39,"icon":"sun"}]},{"name":"Brighton","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.8,0.4,0.0,0.0,0.0],"sf6d":3.5,"ots8d":2.4,"wx":[{"hi":51,"lo":35,"icon":"sun"},{"hi":50,"lo":37,"icon":"cloud"},{"hi":51,"lo":40,"icon":"cloud"},{"hi":56,"lo":38,"icon":"sun"},{"hi":49,"lo":38,"icon":"sun"},{"hi":40,"lo":31,"icon":"rain"},{"hi":45,"lo":28,"icon":"sun"},{"hi":49,"lo":33,"icon":"sun"},{"hi":50,"lo":34,"icon":"sun"},{"hi":52,"lo":33,"icon":"sun"}]},{"name":"Snowbird","base":1,"base_chg":-2,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.0,0.0,0.2,0.5,0.0,0.0,0.0],"sf6d":3.9,"ots8d":3.6,"wx":[{"hi":54,"lo":39,"icon":"sun"},{"hi":52,"lo":40,"icon":"cloud"},{"hi":53,"lo":41,"icon":"rain"},{"hi":58,"lo":42,"icon":"sun"},{"hi":53,"lo":41,"icon":"sun"},{"hi":42,"lo":34,"icon":"snow"},{"hi":46,"lo":29,"icon":"sun"},{"hi":49,"lo":35,"icon":"sun"},{"hi":53,"lo":37,"icon":"sun"},{"hi":55,"lo":38,"icon":"sun"}]}],"roads":[{"label":"I-70 \u2014 Eisenhower Tunnel corridor","alerts":["[INCIDENT] I-70 eastbound: Heavy traffic. \u2014 between Silverthorne and Lakewood"]},{"label":"Vail Pass (I-70, MP 176\u2013195)","alerts":[]},{"label":"US-6 \u2014 Loveland Pass","alerts":[]},{"label":"US-40 \u2014 Berthoud Pass","alerts":[]},{"label":"US-40 \u2014 Rabbit Ears Pass","alerts":[]},{"label":"CO-9 \u2014 Hoosier Pass","alerts":[]},{"label":"CO-119 \u2014 Boulder Canyon (Eldora)","alerts":[]},{"label":"US-160 \u2014 Wolf Creek Pass","alerts":[]}]}
   </script>
   <!-- DIGEST_DATA_END -->
 
@@ -297,6 +319,12 @@
     (function () {
       'use strict';
       var data = JSON.parse(document.getElementById('digest-data').textContent);
+      // Cells may arrive as {v, src} objects (v = inches, src = 'nws' | 'om'); unwrap to plain values and keep the source per cell.
+      data.resorts.forEach(function (resort) {
+        resort.cellSrc = resort.cells.map(function (cell) { return cell && typeof cell === 'object' ? cell.src : null; });
+        resort.cells = resort.cells.map(function (cell) { return cell && typeof cell === 'object' ? cell.v : cell; });
+      });
+      function isModelCell(resort, i) { return resort.cellSrc ? resort.cellSrc[i] === 'om' : i > 7; }
       var maxSnow = Math.max.apply(null, data.resorts.reduce(function (all, resort) { return all.concat(resort.cells); }, []));
 
       function esc(value) {
@@ -356,7 +384,7 @@
           resort.cells.map(function (value, i) {
             var missing = value === null || value === undefined;
             var height = missing || value === 0 ? 2 : Math.max(6, Math.round((value / maxSnow) * 42));
-            return '<td><div class="day-cell"><div class="bar-box"><div class="bar '+(i > 7 ? 'model ' : '')+(missing || value === 0 ? 'zero' : '')+'" style="height:'+height+'px"><span class="snow-value">'+(missing ? 'n/a' : value === 0 ? '—' : formatSnow(value))+'</span></div></div>'+weatherMarkup(resort.wx && resort.wx[i])+'</div></td>';
+            return '<td><div class="day-cell"><div class="bar-box"><div class="bar '+(isModelCell(resort, i) ? 'model ' : '')+(missing || value === 0 ? 'zero' : '')+'" style="height:'+height+'px"><span class="snow-value">'+(missing ? 'n/a' : value === 0 ? '—' : formatSnow(value))+'</span></div></div>'+weatherMarkup(resort.wx && resort.wx[i])+'</div></td>';
           }).join('') + '<td><span class="ots-num">'+formatSnow(resort.ots8d)+'</span><span class="unit">inches</span></td><td><span class="sf-num">'+formatSnow(resort.sf6d)+'</span><span class="unit">inches</span></td></tr>';
       }).join('');
 
@@ -366,7 +394,7 @@
             var day = data.days[i].split(' ');
             var wx = resort.wx && resort.wx[i];
             var wxAvailable = wx && wx.hi !== null && wx.lo !== null && wx.icon;
-            return '<div class="mobile-day"><div class="mobile-date">'+esc(day[0])+(i > 7 ? '*' : '')+'<span>'+esc(day[1])+'</span></div><div class="mobile-bar-track"><div class="mobile-bar-fill '+(i > 7 ? 'model' : '')+'" style="width:'+Math.max(1, (value/maxSnow)*100)+'%"></div></div><div class="mobile-reading"><strong>'+(value ? formatSnow(value)+'\"' : '—')+'</strong><div class="mobile-weather">'+(wxAvailable ? icon(wx.icon)+'<span class="temp">'+wx.hi+'°/'+wx.lo+'°</span>' : '<span>—</span>')+'</div></div></div>';
+            return '<div class="mobile-day"><div class="mobile-date">'+esc(day[0])+(i > 7 ? '*' : '')+'<span>'+esc(day[1])+'</span></div><div class="mobile-bar-track"><div class="mobile-bar-fill '+(isModelCell(resort, i) ? 'model' : '')+'" style="width:'+Math.max(1, (value/maxSnow)*100)+'%"></div></div><div class="mobile-reading"><strong>'+(value ? formatSnow(value)+'\"' : '—')+'</strong><div class="mobile-weather">'+(wxAvailable ? icon(wx.icon)+'<span class="temp">'+wx.hi+'°/'+wx.lo+'°</span>' : '<span>—</span>')+'</div></div></div>';
           }).join('') + '</div></article>';
       }).join('');
 
@@ -388,8 +416,44 @@
         return '<article class="road"><h3>'+esc(road.label)+'</h3><ul>'+alerts+'</ul></article>';
       }).join('');
 
-      var tabs = { resorts: document.getElementById('tab-resorts'), roads: document.getElementById('tab-roads') };
-      var panels = { resorts: document.getElementById('resorts-panel'), roads: document.getElementById('roads-panel') };
+      var STAKES = [
+        { name: 'Copper Mtn', label: 'Snow Stake Cam', refresh: 'Refreshes ~every 15 min', img: 'https://img.hdrelay.com/frames/fb469125-f1f3-459f-aeb4-98cb674e395f/default/last.jpg', live: 'https://www.coppercolorado.com/the-mountain/webcams/mountain/snow-stake-cam' },
+        { name: 'Arapahoe Basin', label: 'Snow Stake Time Lapse', refresh: 'Refreshes ~every 15 min', img: 'https://img.hdrelay.com/frames/929449a8-672b-46c4-8191-b1a6d0842a3f/default/last.jpg', live: 'https://www.arapahoebasin.com/mountain-cams/' },
+        { name: 'Loveland', label: 'Snow Stake Cam', refresh: 'Refreshes ~every 10 min', img: 'https://cams.skiloveland.com/snowcam/snowcam.jpg', live: 'https://skiloveland.com/webcams/' },
+        { name: 'Winter Park', label: 'Snow Stake Cam (YouTube live)', refresh: 'Live stream', img: 'https://i.ytimg.com/vi/yj-5Q1vBMaA/maxresdefault.jpg', live: 'https://www.youtube.com/watch?v=yj-5Q1vBMaA', note: 'The resort says the stake has not been monitored or cleared since Apr 2026, so this frame may not reflect a cleared reading.' },
+        { name: 'Eldora', label: 'Snow Stake Cam', refresh: '', img: '', live: 'https://www.eldora.com/the-mountain/current-conditions/webcams/' },
+        { name: 'Wolf Creek', label: 'Summit cam (no official stake cam)', refresh: 'Refreshes ~every 15 min', img: 'https://player.brownrice.com/snapshot/wolfcreeksummit', live: 'https://wolfcreekski.com/webcams/', note: 'Shows summit coverage, not a measured stake.' },
+        { name: 'Breckenridge', label: 'Snow Stake Cam', refresh: '', img: '', live: 'https://www.breckenridge.com/the-mountain/mountain-conditions/webcams.aspx' },
+        { name: 'Keystone', label: 'Snow Stake — North Peak 11,237 ft', refresh: 'Refreshes ~every 5 min', img: 'https://cache.snow.com/Mtncams/KeySnowStake.jpg', live: 'https://www.keystoneresort.com/the-mountain/mountain-conditions/mountain-cams.aspx' },
+        { name: 'Vail', label: 'Snow Stake Summit', refresh: 'Refreshes ~every 5 min · 6:00 AM–3:55 PM MT', img: 'https://player.brownrice.com/snapshot/vailsnowsummit', live: 'https://www.vail.com/the-mountain/mountain-conditions/mountain-cams.aspx', note: 'Cam runs 6 AM–3:55 PM, so the 5 AM pull shows the last overnight frame.' },
+        { name: 'Beaver Creek', label: 'Snow Stake', refresh: 'Refreshes ~every 5 min · 6:00 AM–3:55 PM MT', img: 'https://player.brownrice.com/snapshot/bcsnowstake2', live: 'https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx', note: 'Cam runs 6 AM–3:55 PM, so the 5 AM pull shows the last overnight frame.' },
+        { name: 'Steamboat', label: 'Mid Mountain Snow Cam (YouTube live)', refresh: 'Live stream', img: 'https://i.ytimg.com/vi/lKc9xwndUK4/maxresdefault.jpg', live: 'https://www.youtube.com/watch?v=lKc9xwndUK4', note: 'Official stake, cleared daily at 5 AM.' },
+        { name: 'Brighton', label: 'Top of Crest Lift (no official stake cam)', refresh: 'Live stream', img: 'https://i.ytimg.com/vi/Zv8HYwaXjBg/maxresdefault.jpg', live: 'https://www.youtube.com/watch?v=Zv8HYwaXjBg' },
+        { name: 'Snowbird', label: 'Snowstake Webcam', refresh: 'Refreshes ~every 15–20 min', img: 'https://img.hdrelay.com/frames/8611e276-7ee5-42c0-b8cd-d9e1890e1cd4/default/last.jpg', live: 'https://www.snowbird.com/the-mountain/webcams/snowstake-webcam/' }
+      ];
+      var stakeBust = '?t=' + encodeURIComponent(data.refreshed_at || '');
+      document.getElementById('stake-grid').innerHTML = STAKES.map(function (stake, i) {
+        var photo = stake.img
+          ? '<img src="'+esc(stake.img + stakeBust)+'" alt="'+esc(stake.name)+' — '+esc(stake.label)+'" loading="lazy"><div class="stake-nofeed" hidden>No feed right now</div>'
+          : '<div class="stake-nofeed">No feed right now</div>';
+        return '<article class="stake"><div class="stake-photo">'+photo+'<span class="stake-num">'+(i+1)+'</span></div>'+
+          '<div class="stake-body"><h3>'+esc(stake.name)+'</h3><span class="stake-label">'+esc(stake.label)+'</span>'+
+          (stake.refresh ? '<span class="stake-refresh">'+esc(stake.refresh)+'</span>' : '')+
+          (stake.note ? '<span class="stake-note">'+esc(stake.note)+'</span>' : '')+
+          '<a class="stake-link" href="'+esc(stake.live)+'" target="_blank" rel="noopener">Live cam →</a></div></article>';
+      }).join('');
+      Array.prototype.forEach.call(document.querySelectorAll('#stake-grid .stake-photo img'), function (img) {
+        function markFailed() {
+          img.style.display = 'none';
+          var fallback = img.parentNode.querySelector('.stake-nofeed');
+          if (fallback) fallback.hidden = false;
+        }
+        if (img.complete && img.naturalWidth === 0) markFailed();
+        else img.addEventListener('error', markFailed);
+      });
+
+      var tabs = { resorts: document.getElementById('tab-resorts'), roads: document.getElementById('tab-roads'), stakes: document.getElementById('tab-stakes') };
+      var panels = { resorts: document.getElementById('resorts-panel'), roads: document.getElementById('roads-panel'), stakes: document.getElementById('stakes-panel') };
       function showView(name, updateHash) {
         Object.keys(tabs).forEach(function (key) {
           tabs[key].setAttribute('aria-selected', key === name ? 'true' : 'false');
@@ -399,7 +463,9 @@
       }
       tabs.resorts.addEventListener('click', function () { showView('resorts', true); });
       tabs.roads.addEventListener('click', function () { showView('roads', true); });
+      tabs.stakes.addEventListener('click', function () { showView('stakes', true); });
       if (location.hash === '#roads') showView('roads', false);
+      if (location.hash === '#stakes') showView('stakes', false);
     })();
   </script>
 </body>
