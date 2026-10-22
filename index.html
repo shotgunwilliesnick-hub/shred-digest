@@ -185,6 +185,43 @@
     .stake-note { color: var(--warn); font-size: .8rem; }
     .stake-link { color: var(--accent); font-weight: 700; font-size: .86rem; text-decoration: none; }
     .stake-link:hover { text-decoration: underline; }
+    .av-banner { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); border: 1px solid var(--danger); border-radius: 8px; padding: 14px 16px; margin: 22px 0 4px; box-shadow: var(--shadow); }
+    .av-banner strong { display: block; color: var(--danger); font: 700 1.3rem/1.1 "Barlow Condensed", sans-serif; margin-bottom: 6px; }
+    .av-banner ul { margin: 0; padding-left: 18px; font-size: .9rem; }
+    .av-head { margin: 26px 0 12px; }
+    .av-head h2 { font-size: clamp(1.45rem, 3vw, 2.1rem); }
+    .av-statement { background: color-mix(in srgb, var(--warn) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--warn) 50%, var(--line)); border-radius: 8px; padding: 16px 18px; box-shadow: var(--shadow); margin-bottom: 12px; }
+    .av-statement h3 { margin: 0 0 4px; font-size: 1.3rem; line-height: 1.05; }
+    .av-statement p { margin: 0 0 10px; font-size: .92rem; }
+    .av-statement p.av-meta { margin: 0 0 8px; }
+    .av-meta { color: var(--muted); font-size: .8rem; }
+    .zone-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .zone { background: var(--surface); border: 1px solid var(--line); padding: 16px 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 9px; }
+    .zone:nth-child(3n+1) { border-radius: 10px 2px 2px 2px; }
+    .zone:nth-child(3n) { border-radius: 2px 10px 2px 2px; }
+    .zone h3 { margin: 0; font-size: 1.3rem; line-height: 1.05; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: -4px; }
+    .pill { font-size: .68rem; font-weight: 700; letter-spacing: .02em; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); }
+    .band-row { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+    .band-day { font: 700 .78rem "Barlow Condensed", sans-serif; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); width: 88px; flex: 0 0 auto; }
+    .chip { display: inline-flex; align-items: baseline; gap: 5px; font-size: .74rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; color: #fff; white-space: nowrap; }
+    .chip b { font-weight: 600; font-size: .64rem; letter-spacing: .03em; text-transform: uppercase; opacity: .85; }
+    .chip.d1 { background: #4caf50; color: #14260f; }
+    .chip.d2 { background: #e6c200; color: #221d00; }
+    .chip.d3 { background: #ff9800; color: #2a1500; }
+    .chip.d4 { background: #e53935; }
+    .chip.d5 { background: #8e1420; }
+    .chip.dn { background: var(--surface-3); color: var(--muted); }
+    .av-none { color: var(--muted); font-size: .9rem; margin: 0; }
+    .av-note { color: var(--muted); font-size: .82rem; margin: 0; }
+    .av-bottom { margin: 0; font-size: .92rem; }
+    .av-link { color: var(--accent); font-weight: 700; font-size: .86rem; text-decoration: none; }
+    .av-link:hover { text-decoration: underline; }
+    .zone .av-link { margin-top: auto; align-self: flex-start; }
+    .av-legend { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; box-shadow: var(--shadow); margin-top: 14px; }
+    .av-legend h3 { margin: 0 0 10px; font-size: 1.3rem; line-height: 1.05; }
+    .av-legend .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .av-footer { color: var(--muted); font-size: .8rem; margin: 16px 2px 0; }
     footer { display: flex; justify-content: space-between; align-items: start; gap: 30px; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
     footer p { margin: 0; }
     footer strong { color: var(--ink); }
@@ -236,6 +273,8 @@
       .road-stat { display: flex; align-items: baseline; gap: 9px; padding: 12px 14px; }
       .road-list { grid-template-columns: 1fr; }
       .road, .road:nth-child(n) { border-radius: 8px; }
+      .zone-list { grid-template-columns: 1fr; }
+      .zone, .zone:nth-child(n) { border-radius: 8px; }
       .section-head { display: block; }
       .section-head p { text-align: left; margin-top: 7px; }
       footer { display: grid; gap: 9px; }
@@ -243,7 +282,7 @@
     @media (max-width: 480px) {
       h1 { font-size: 2.45rem; }
       .view-tabs { width: 100%; }
-      .view-tabs button { flex: 1; }
+      .view-tabs button { flex: 1; padding: 9px 5px; font-size: .8rem; }
       .forecast-grid { grid-template-columns: 1fr; }
       .mobile-day, .mobile-day:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--line); }
       .mobile-day:last-child { border-bottom: 0; }
@@ -267,6 +306,7 @@
       <button type="button" id="tab-resorts" aria-controls="resorts-panel" aria-selected="true">Resorts</button>
       <button type="button" id="tab-roads" aria-controls="roads-panel" aria-selected="false">Roads &amp; Passes</button>
       <button type="button" id="tab-stakes" aria-controls="stakes-panel" aria-selected="false">❄ Snow Stakes</button>
+      <button type="button" id="tab-avalanche" aria-controls="avalanche-panel" aria-selected="false">🏔 Avalanche</button>
     </nav>
 
     <section id="resorts-panel" class="panel" aria-labelledby="tab-resorts">
@@ -302,6 +342,10 @@
       <div class="stake-grid" id="stake-grid"></div>
     </section>
 
+    <section id="avalanche-panel" class="panel" aria-labelledby="tab-avalanche" hidden>
+      <div id="avalanche-content"></div>
+    </section>
+
     <footer>
       <p><strong>NEW/24h:</strong> overnight snowfall / snowfall reported in the last 24 hours · <strong>Base:</strong> total measured snow depth · National Weather Service days 1–8 · Open-Meteo days 9–10 · Snow-Forecast.com summit 6-day total<br>OTS 8d: OnTheSnow.com 8-day total (third opinion)</p>
       <p><strong>Roads:</strong> CDOT alerts · <span id="footer-date"></span></p>
@@ -311,9 +355,17 @@
 
   <!-- DIGEST_DATA_START -->
   <script id="digest-data" type="application/json">
-{"date":"Wednesday, Oct 21","refreshed_at":"5:01 PM MT on Wed, Oct 21","days":["Wed 10/21","Thu 10/22","Fri 10/23","Sat 10/24","Sun 10/25","Mon 10/26","Tue 10/27","Wed 10/28","Thu 10/29","Fri 10/30"],"resorts":[{"name":"Copper Mtn","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.2,0.4,0.1,0.0,0.0,0.0,0.0],"sf6d":3.1,"ots8d":1.1,"wx":[{"hi":54,"lo":31,"icon":"cloud"},{"hi":50,"lo":39,"icon":"cloud"},{"hi":54,"lo":35,"icon":"sun"},{"hi":48,"lo":33,"icon":"rain"},{"hi":45,"lo":31,"icon":"sun"},{"hi":39,"lo":28,"icon":"cloud"},{"hi":50,"lo":28,"icon":"sun"},{"hi":53,"lo":30,"icon":"partly"},{"hi":50,"lo":32,"icon":"sun"},{"hi":47,"lo":30,"icon":"cloud"}]},{"name":"Arapahoe Basin","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.4,1.5,0.1,0.0,0.0,0.0,0.0],"sf6d":1.6,"ots8d":2.1,"wx":[{"hi":50,"lo":31,"icon":"partly"},{"hi":46,"lo":36,"icon":"cloud"},{"hi":50,"lo":32,"icon":"sun"},{"hi":40,"lo":30,"icon":"rain"},{"hi":41,"lo":27,"icon":"sun"},{"hi":36,"lo":24,"icon":"cloud"},{"hi":46,"lo":25,"icon":"sun"},{"hi":48,"lo":26,"icon":"cloud"},{"hi":45,"lo":29,"icon":"sun"},{"hi":43,"lo":26,"icon":"cloud"}]},{"name":"Loveland","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,1.5,1.7,0.1,0.0,0.0,0.0,0.0],"sf6d":2.4,"ots8d":0.9,"wx":[{"hi":51,"lo":31,"icon":"cloud"},{"hi":46,"lo":35,"icon":"cloud"},{"hi":51,"lo":31,"icon":"sun"},{"hi":43,"lo":29,"icon":"rain"},{"hi":41,"lo":28,"icon":"sun"},{"hi":35,"lo":24,"icon":"cloud"},{"hi":46,"lo":24,"icon":"sun"},{"hi":49,"lo":25,"icon":"cloud"},{"hi":46,"lo":28,"icon":"sun"},{"hi":43,"lo":25,"icon":"cloud"}]},{"name":"Winter Park","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.2,0.2,0.1,0.0,0.0,0.0,0.0],"sf6d":1.2,"ots8d":2.3,"wx":[{"hi":58,"lo":35,"icon":"sun"},{"hi":55,"lo":40,"icon":"cloud"},{"hi":59,"lo":38,"icon":"sun"},{"hi":47,"lo":35,"icon":"cloud"},{"hi":53,"lo":35,"icon":"sun"},{"hi":40,"lo":30,"icon":"cloud"},{"hi":52,"lo":29,"icon":"sun"},{"hi":54,"lo":32,"icon":"cloud"},{"hi":52,"lo":35,"icon":"sun"},{"hi":49,"lo":33,"icon":"partly"}]},{"name":"Eldora","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.4,0.0,0.1,0.0,0.0,0.0,0.0],"sf6d":0.8,"ots8d":0.9,"wx":[{"hi":58,"lo":35,"icon":"sun"},{"hi":58,"lo":45,"icon":"cloud"},{"hi":60,"lo":38,"icon":"sun"},{"hi":43,"lo":34,"icon":"cloud"},{"hi":49,"lo":34,"icon":"rain"},{"hi":42,"lo":30,"icon":"cloud"},{"hi":51,"lo":29,"icon":"sun"},{"hi":51,"lo":29,"icon":"cloud"},{"hi":53,"lo":33,"icon":"cloud"},{"hi":49,"lo":31,"icon":"cloud"}]},{"name":"Wolf Creek","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.9,1.3,0.0,0.0,0.0,0.0,0.0],"sf6d":6.3,"ots8d":6.1,"wx":[{"hi":46,"lo":35,"icon":"cloud"},{"hi":45,"lo":36,"icon":"rain"},{"hi":40,"lo":34,"icon":"fog"},{"hi":46,"lo":31,"icon":"rain"},{"hi":39,"lo":24,"icon":"snow"},{"hi":43,"lo":23,"icon":"sun"},{"hi":48,"lo":26,"icon":"partly"},{"hi":46,"lo":30,"icon":"cloud"},{"hi":44,"lo":30,"icon":"partly"},{"hi":44,"lo":31,"icon":"cloud"}]},{"name":"Breckenridge","base":2,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.1,0.1,0.0,0.0,0.0,0.0],"sf6d":3.5,"ots8d":2.1,"wx":[{"hi":58,"lo":30,"icon":"cloud"},{"hi":53,"lo":41,"icon":"cloud"},{"hi":55,"lo":35,"icon":"sun"},{"hi":47,"lo":33,"icon":"rain"},{"hi":44,"lo":32,"icon":"partly"},{"hi":40,"lo":27,"icon":"cloud"},{"hi":51,"lo":26,"icon":"sun"},{"hi":54,"lo":29,"icon":"cloud"},{"hi":51,"lo":32,"icon":"sun"},{"hi":48,"lo":29,"icon":"cloud"}]},{"name":"Keystone","base":0,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.3,1.2,0.1,0.0,0.0,0.0,0.0],"sf6d":1.6,"ots8d":2.1,"wx":[{"hi":56,"lo":30,"icon":"cloud"},{"hi":49,"lo":38,"icon":"cloud"},{"hi":53,"lo":34,"icon":"sun"},{"hi":47,"lo":32,"icon":"rain"},{"hi":44,"lo":30,"icon":"sun"},{"hi":38,"lo":27,"icon":"cloud"},{"hi":49,"lo":27,"icon":"sun"},{"hi":52,"lo":29,"icon":"partly"},{"hi":49,"lo":31,"icon":"sun"},{"hi":46,"lo":29,"icon":"cloud"}]},{"name":"Vail","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":0.8,"ots8d":1.7,"wx":[{"hi":60,"lo":34,"icon":"cloud"},{"hi":55,"lo":45,"icon":"cloud"},{"hi":60,"lo":40,"icon":"cloud"},{"hi":57,"lo":37,"icon":"cloud"},{"hi":52,"lo":36,"icon":"rain"},{"hi":43,"lo":33,"icon":"rain"},{"hi":55,"lo":32,"icon":"sun"},{"hi":58,"lo":34,"icon":"cloud"},{"hi":56,"lo":38,"icon":"sun"},{"hi":52,"lo":35,"icon":"partly"}]},{"name":"Beaver Creek","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":1.2,"ots8d":0.5,"wx":[{"hi":57,"lo":32,"icon":"cloud"},{"hi":55,"lo":44,"icon":"cloud"},{"hi":59,"lo":40,"icon":"sun"},{"hi":59,"lo":37,"icon":"sun"},{"hi":51,"lo":37,"icon":"rain"},{"hi":44,"lo":34,"icon":"cloud"},{"hi":55,"lo":32,"icon":"sun"},{"hi":56,"lo":34,"icon":"partly"},{"hi":57,"lo":39,"icon":"sun"},{"hi":53,"lo":35,"icon":"partly"}]},{"name":"Steamboat","base":0,"base_chg":-1,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":0.4,"ots8d":0.0,"wx":[{"hi":63,"lo":38,"icon":"cloud"},{"hi":56,"lo":47,"icon":"cloud"},{"hi":62,"lo":44,"icon":"cloud"},{"hi":64,"lo":39,"icon":"sun"},{"hi":54,"lo":38,"icon":"rain"},{"hi":50,"lo":35,"icon":"cloud"},{"hi":56,"lo":36,"icon":"partly"},{"hi":59,"lo":38,"icon":"cloud"},{"hi":60,"lo":43,"icon":"sun"},{"hi":56,"lo":38,"icon":"sun"}]},{"name":"Brighton","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.2,0.1,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":2.8,"ots8d":1.8,"wx":[{"hi":47,"lo":39,"icon":"sun"},{"hi":46,"lo":36,"icon":"cloud"},{"hi":39,"lo":31,"icon":"partly"},{"hi":45,"lo":30,"icon":"sun"},{"hi":44,"lo":31,"icon":"cloud"},{"hi":48,"lo":33,"icon":"sun"},{"hi":51,"lo":35,"icon":"partly"},{"hi":49,"lo":37,"icon":"cloud"},{"hi":49,"lo":36,"icon":"sun"},{"hi":50,"lo":36,"icon":"partly"}]},{"name":"Snowbird","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.1,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":3.5,"ots8d":2.5,"wx":[{"hi":52,"lo":41,"icon":"sun"},{"hi":50,"lo":38,"icon":"cloud"},{"hi":41,"lo":33,"icon":"snow"},{"hi":47,"lo":32,"icon":"sun"},{"hi":45,"lo":33,"icon":"cloud"},{"hi":47,"lo":34,"icon":"sun"},{"hi":50,"lo":36,"icon":"partly"},{"hi":52,"lo":39,"icon":"cloud"},{"hi":50,"lo":39,"icon":"sun"},{"hi":51,"lo":37,"icon":"partly"}]}],"roads":[{"label":"I-70 \u2014 Eisenhower Tunnel corridor","alerts":["[INCIDENT] I-70 eastbound: Two left lanes closed. \u2014 in Lakewood","[CONDITION] I-70: Scattered showers. \u2014 between 5 miles east of the Dillon area and Georgetown","[CONDITION] I-70: Wet. \u2014 between Eagle and Vail","[CONDITION] I-70: Wet in areas. \u2014 between 12 miles west of the Loma area and Grand Junction"]},{"label":"Vail Pass (I-70, MP 176\u2013195)","alerts":["[CONDITION] I-70: Wet. \u2014 between Eagle and Vail"]},{"label":"US-6 \u2014 Loveland Pass","alerts":["[CONDITION] US 6: Wet. \u2014 between Silverthorne and 1 mile east of the Keystone area"]},{"label":"US-40 \u2014 Berthoud Pass","alerts":[]},{"label":"US-40 \u2014 Rabbit Ears Pass","alerts":[]},{"label":"CO-9 \u2014 Hoosier Pass","alerts":[]},{"label":"CO-119 \u2014 Boulder Canyon (Eldora)","alerts":[]},{"label":"US-160 \u2014 Wolf Creek Pass","alerts":["[CONDITION] US 160: Wet. \u2014 between Mancos and Durango","[CONDITION] US 160: Wet with rain and scattered showers. \u2014 between Pagosa Springs and South Fork"]},{"label":"SR-190 \u2014 Big Cottonwood (Brighton/Solitude)","alerts":["Open \u2014 no alerts or restrictions (UDOT)"]},{"label":"SR-210 \u2014 Little Cottonwood (Snowbird/Alta)","alerts":["Open \u2014 no alerts or restrictions (UDOT)"]}]}
+{"date":"Wednesday, Oct 21","refreshed_at":"7:21 PM MT on Wed, Oct 21","days":["Wed 10/21","Thu 10/22","Fri 10/23","Sat 10/24","Sun 10/25","Mon 10/26","Tue 10/27","Wed 10/28","Thu 10/29","Fri 10/30"],"resorts":[{"name":"Copper Mtn","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.2,0.4,0.1,0.0,0.0,0.0,0.0],"sf6d":2.8,"ots8d":1.1,"wx":[{"hi":54,"lo":31,"icon":"cloud"},{"hi":50,"lo":39,"icon":"cloud"},{"hi":54,"lo":35,"icon":"sun"},{"hi":48,"lo":33,"icon":"rain"},{"hi":45,"lo":31,"icon":"fog"},{"hi":39,"lo":28,"icon":"cloud"},{"hi":50,"lo":28,"icon":"sun"},{"hi":53,"lo":30,"icon":"partly"},{"hi":50,"lo":32,"icon":"sun"},{"hi":47,"lo":30,"icon":"cloud"}]},{"name":"Arapahoe Basin","base":0,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.4,1.5,0.1,0.0,0.0,0.0,0.0],"sf6d":2.4,"ots8d":2.1,"wx":[{"hi":50,"lo":31,"icon":"partly"},{"hi":46,"lo":35,"icon":"cloud"},{"hi":50,"lo":32,"icon":"sun"},{"hi":40,"lo":30,"icon":"rain"},{"hi":41,"lo":27,"icon":"fog"},{"hi":36,"lo":24,"icon":"cloud"},{"hi":46,"lo":25,"icon":"sun"},{"hi":48,"lo":26,"icon":"cloud"},{"hi":45,"lo":29,"icon":"sun"},{"hi":43,"lo":26,"icon":"cloud"}]},{"name":"Loveland","base":0,"base_chg":-1,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,1.5,1.7,0.1,0.0,0.0,0.0,0.0],"sf6d":2.4,"ots8d":0.9,"wx":[{"hi":51,"lo":31,"icon":"cloud"},{"hi":46,"lo":35,"icon":"cloud"},{"hi":51,"lo":31,"icon":"sun"},{"hi":43,"lo":29,"icon":"rain"},{"hi":41,"lo":28,"icon":"sun"},{"hi":35,"lo":24,"icon":"cloud"},{"hi":46,"lo":24,"icon":"sun"},{"hi":49,"lo":25,"icon":"cloud"},{"hi":46,"lo":28,"icon":"sun"},{"hi":43,"lo":25,"icon":"cloud"}]},{"name":"Winter Park","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.2,0.2,0.1,0.0,0.0,0.0,0.0],"sf6d":1.2,"ots8d":2.3,"wx":[{"hi":58,"lo":35,"icon":"sun"},{"hi":55,"lo":39,"icon":"cloud"},{"hi":59,"lo":38,"icon":"sun"},{"hi":47,"lo":35,"icon":"cloud"},{"hi":53,"lo":35,"icon":"sun"},{"hi":40,"lo":30,"icon":"cloud"},{"hi":52,"lo":29,"icon":"sun"},{"hi":54,"lo":32,"icon":"cloud"},{"hi":52,"lo":35,"icon":"sun"},{"hi":49,"lo":33,"icon":"partly"}]},{"name":"Eldora","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.4,0.0,0.1,0.0,0.0,0.0,0.0],"sf6d":1.2,"ots8d":0.9,"wx":[{"hi":58,"lo":35,"icon":"sun"},{"hi":58,"lo":43,"icon":"cloud"},{"hi":60,"lo":38,"icon":"sun"},{"hi":43,"lo":34,"icon":"cloud"},{"hi":49,"lo":34,"icon":"rain"},{"hi":42,"lo":30,"icon":"cloud"},{"hi":51,"lo":29,"icon":"sun"},{"hi":51,"lo":29,"icon":"cloud"},{"hi":53,"lo":33,"icon":"cloud"},{"hi":49,"lo":31,"icon":"cloud"}]},{"name":"Wolf Creek","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.9,1.3,0.0,0.0,0.0,null,null],"sf6d":8.7,"ots8d":6.1,"wx":[null,null,null,null,null,null,null,null,null,null]},{"name":"Breckenridge","base":2,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.1,0.1,0.0,0.0,0.0,0.0],"sf6d":4.3,"ots8d":2.1,"wx":[{"hi":58,"lo":30,"icon":"cloud"},{"hi":51,"lo":40,"icon":"cloud"},{"hi":55,"lo":35,"icon":"sun"},{"hi":47,"lo":33,"icon":"rain"},{"hi":44,"lo":32,"icon":"fog"},{"hi":40,"lo":27,"icon":"cloud"},{"hi":51,"lo":26,"icon":"sun"},{"hi":54,"lo":29,"icon":"cloud"},{"hi":51,"lo":32,"icon":"sun"},{"hi":48,"lo":29,"icon":"cloud"}]},{"name":"Keystone","base":0,"base_chg":-1,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,1.3,1.2,0.1,0.0,0.0,0.0,0.0],"sf6d":2.8,"ots8d":2.1,"wx":[{"hi":56,"lo":30,"icon":"cloud"},{"hi":49,"lo":37,"icon":"cloud"},{"hi":53,"lo":34,"icon":"sun"},{"hi":47,"lo":32,"icon":"rain"},{"hi":44,"lo":30,"icon":"fog"},{"hi":38,"lo":27,"icon":"cloud"},{"hi":49,"lo":27,"icon":"sun"},{"hi":52,"lo":29,"icon":"partly"},{"hi":49,"lo":31,"icon":"sun"},{"hi":46,"lo":29,"icon":"cloud"}]},{"name":"Vail","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":2.0,"ots8d":1.7,"wx":[{"hi":60,"lo":34,"icon":"cloud"},{"hi":54,"lo":45,"icon":"cloud"},{"hi":60,"lo":40,"icon":"cloud"},{"hi":57,"lo":37,"icon":"cloud"},{"hi":52,"lo":36,"icon":"rain"},{"hi":43,"lo":33,"icon":"rain"},{"hi":55,"lo":32,"icon":"sun"},{"hi":58,"lo":34,"icon":"cloud"},{"hi":56,"lo":38,"icon":"sun"},{"hi":52,"lo":35,"icon":"partly"}]},{"name":"Beaver Creek","base":1,"base_chg":0,"overnight":0,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":2.4,"ots8d":0.5,"wx":[{"hi":57,"lo":32,"icon":"cloud"},{"hi":55,"lo":43,"icon":"cloud"},{"hi":59,"lo":40,"icon":"sun"},{"hi":59,"lo":37,"icon":"sun"},{"hi":51,"lo":37,"icon":"rain"},{"hi":44,"lo":34,"icon":"cloud"},{"hi":55,"lo":32,"icon":"sun"},{"hi":56,"lo":34,"icon":"partly"},{"hi":57,"lo":39,"icon":"sun"},{"hi":53,"lo":35,"icon":"partly"}]},{"name":"Steamboat","base":0,"base_chg":-1,"overnight":1,"h24":0,"official_src":false,"cells":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"sf6d":0.0,"ots8d":0.0,"wx":[{"hi":62,"lo":38,"icon":"cloud"},{"hi":58,"lo":45,"icon":"cloud"},{"hi":62,"lo":44,"icon":"cloud"},{"hi":64,"lo":39,"icon":"sun"},{"hi":54,"lo":38,"icon":"rain"},{"hi":50,"lo":35,"icon":"cloud"},{"hi":56,"lo":36,"icon":"partly"},{"hi":59,"lo":38,"icon":"cloud"},{"hi":60,"lo":43,"icon":"sun"},{"hi":56,"lo":38,"icon":"sun"}]},{"name":"Brighton","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.2,0.1,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":3.5,"ots8d":1.8,"wx":[{"hi":47,"lo":39,"icon":"sun"},{"hi":46,"lo":36,"icon":"cloud"},{"hi":39,"lo":31,"icon":"partly"},{"hi":45,"lo":30,"icon":"sun"},{"hi":44,"lo":31,"icon":"cloud"},{"hi":48,"lo":33,"icon":"sun"},{"hi":51,"lo":35,"icon":"partly"},{"hi":49,"lo":37,"icon":"cloud"},{"hi":49,"lo":36,"icon":"sun"},{"hi":50,"lo":36,"icon":"partly"}]},{"name":"Snowbird","base":0,"base_chg":0,"overnight":0,"h24":0,"official_src":true,"cells":[0.0,0.0,0.0,0.1,0.0,0.0,0.1,0.0,0.0,0.0],"sf6d":4.7,"ots8d":2.5,"wx":[{"hi":52,"lo":41,"icon":"sun"},{"hi":50,"lo":38,"icon":"cloud"},{"hi":41,"lo":33,"icon":"snow"},{"hi":47,"lo":32,"icon":"sun"},{"hi":45,"lo":33,"icon":"cloud"},{"hi":47,"lo":34,"icon":"sun"},{"hi":50,"lo":36,"icon":"partly"},{"hi":52,"lo":39,"icon":"cloud"},{"hi":50,"lo":39,"icon":"sun"},{"hi":51,"lo":37,"icon":"partly"}]}],"roads":[{"label":"I-70 \u2014 Eisenhower Tunnel corridor","alerts":["[INCIDENT] I-70 eastbound: Left lane closed. \u2014 in Lakewood","[CONDITION] I-70: Scattered showers. \u2014 between 5 miles east of the Dillon area and Georgetown","[CONDITION] I-70: Wet in areas. \u2014 between Eagle and Vail"]},{"label":"Vail Pass (I-70, MP 176\u2013195)","alerts":["[CONDITION] I-70: Wet in areas. \u2014 between Eagle and Vail"]},{"label":"US-6 \u2014 Loveland Pass","alerts":["[CONDITION] US 6: Wet. \u2014 between Silverthorne and 1 mile east of the Keystone area"]},{"label":"US-40 \u2014 Berthoud Pass","alerts":[]},{"label":"US-40 \u2014 Rabbit Ears Pass","alerts":[]},{"label":"CO-9 \u2014 Hoosier Pass","alerts":["[CONDITION] CO 9: Scattered showers. \u2014 between US 24 and US 285","[CONDITION] CO 9: Wet. \u2014 between Silverthorne and Kremmling"]},{"label":"CO-119 \u2014 Boulder Canyon (Eldora)","alerts":[]},{"label":"US-160 \u2014 Wolf Creek Pass","alerts":["[CONDITION] US 160: Scattered showers. \u2014 between Fort Garland and Walsenburg","[CONDITION] US 160: Wet. \u2014 between Mancos and Durango","[CONDITION] US 160: Wet with rain and scattered showers. \u2014 between Pagosa Springs and South Fork"]},{"label":"SR-190 \u2014 Big Cottonwood (Brighton/Solitude)","alerts":["Open \u2014 no alerts or restrictions (UDOT)"]},{"label":"SR-210 \u2014 Little Cottonwood (Snowbird/Alta)","alerts":["Open \u2014 no alerts or restrictions (UDOT)"]}]}
   </script>
+  
   <!-- DIGEST_DATA_END -->
+
+  <!-- AVALANCHE_DATA_START -->
+  <script id="avalanche-data" type="application/json">
+{"refreshed_at":"7:21 PM MT on Wed, Oct 21","centers":{"CAIC":{"statement":{"published":"Wed Oct 21, 4:30 PM MT","expires":"Sat Oct 31, 4:30 PM MT","text":"Avalanche Conditions A moisture-laden storm arrives in Colorado on Wednesday, bringing early-season avalanche concerns to steep, snow-covered slopes. Nearly every fall, small avalanches catch eager snow riders, late-season hikers, and hunters off guard. If you are traveling through the high country over the next few days, exercise caution on steep, snow-covered terrain. For Wednesday and Thursday, in areas with snow already on the ground, rain falling on the early snowpack increases the potential for Wet Loose avalanches. From Thursday through the weekend, as new snow accumulates and wind-drifted snow obscures the ground cover, dry slab and loose avalanches will become a threat at the highest elevations. It doesn't take much snow on steep grassy slopes, rock slabs, or remnant snowfields for slides to occur. We will update the Statewide Avalanche Conditions as necessary. On November 1, 2026, we will resume our daily weather and avalanche forecasts. We will update the Field Report and Avalanche Observations as information comes in, so please send us your observations.","warning":false},"zones":[{"name":"Medicine Bow Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Never Summer Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Park Range","resorts":["Steamboat"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Elkhead Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Rabbit Ears Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Flat Top Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Front Range","resorts":["Loveland","Winter Park","Eldora"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Gore Range","resorts":["Vail","Beaver Creek"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Ten Mile Range","resorts":["Copper Mtn","Breckenridge","Keystone","Arapahoe Basin"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Mosquito Range","resorts":["Breckenridge"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Battlement Mesa","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Grand Mesa","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Elk Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"West Elk Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Red Table and Hardscrabble","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Sawatch Mountains","resorts":["Beaver Creek"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Pikes Peak Massif","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Cochetopa Hills","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"La Garita Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Northern San Juan Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Rico Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"La Plata Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Southern San Juan Mountains","resorts":["Wolf Creek"],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"},{"name":"Sangre de Cristo Mountains","resorts":[],"status":"statement","today":{"upper":null,"middle":null,"lower":null},"tomorrow":{"upper":null,"middle":null,"lower":null},"bottom_line":"","note":"","warning":false,"published":"Wed Oct 21, 4:30 PM MT"}],"url":"https://avalanche.state.co.us"},"UAC":{"statement":null,"zones":[{"name":"Logan","resorts":[],"status":"none","today":null,"tomorrow":null,"bottom_line":"","note":"","warning":false,"published":"Mon Sep 14, 6:43 PM MT"},{"name":"Ogden","resorts":[],"status":"none","today":null,"tomorrow":null,"bottom_line":"","note":"","warning":false,"published":"Mon Sep 14, 6:44 PM MT"},{"name":"Salt Lake","resorts":["Brighton","Snowbird"],"status":"none","today":null,"tomorrow":null,"bottom_line":"","note":"","warning":false,"published":"Mon Sep 14, 6:43 PM MT"},{"name":"Uintas","resorts":[],"status":"none","today":null,"tomorrow":null,"bottom_line":"","note":"","warning":false,"published":"Mon Sep 14, 6:43 PM MT"}],"url":"https://utahavalanchecenter.org/forecast/salt-lake"}}}
+  </script>
+  
+  <!-- AVALANCHE_DATA_END -->
 
   <script>
     (function () {
@@ -368,7 +420,7 @@
       var deepest = data.resorts.slice().sort(function (a,b) { return b.base-a.base; })[0];
       document.getElementById('metrics').innerHTML =
         '<div class="metric"><strong>'+data.resorts.length+'</strong><span>resorts tracked</span></div>'+
-        '<div class="metric"><strong>'+deepest.base+'\"</strong><span>deepest measured base · '+esc(deepest.name)+'</span></div>'+
+        '<div class="metric"><strong>'+(deepest.base === null || deepest.base === undefined ? 'n/a' : deepest.base+'\"')+'</strong><span>deepest measured base · '+esc(deepest.name)+'</span></div>'+
         '<div class="metric"><strong>'+formatSnow(totals[0].total)+'\"</strong><span>largest 10-day signal · '+esc(totals[0].name)+'</span></div>';
 
       document.getElementById('forecast-head').innerHTML = '<tr><th class="resort-col">Resort</th><th class="base-col"><span class="base-head"><strong>NEW/24h</strong><small>Base</small></span></th>'+ 
@@ -379,7 +431,7 @@
 
       document.getElementById('forecast-body').innerHTML = data.resorts.map(function (resort) {
         return '<tr><td class="resort-name"><strong>'+esc(resort.name)+'</strong><small>10-day: '+formatSnow(resort.cells.reduce(function(a,b){return a+b;},0))+'\"</small></td>'+
-          '<td><div class="base-stack"><span class="base-change"><b>NEW</b>'+formatBaseChange(Math.max(0, Number(resort.overnight) || 0))+'</span><span class="base-change"><b>24h</b>'+formatBaseChange(Math.max(0, Number(resort.h24) || 0))+'</span><span class="base-num"><b>Base</b>'+resort.base+'″</span></div></td>'+
+          '<td><div class="base-stack"><span class="base-change"><b>NEW</b>'+formatBaseChange(Math.max(0, Number(resort.overnight) || 0))+'</span><span class="base-change"><b>24h</b>'+formatBaseChange(Math.max(0, Number(resort.h24) || 0))+'</span><span class="base-num"><b>Base</b>'+(resort.base === null || resort.base === undefined ? 'n/a' : resort.base+'″')+'</span></div></td>'+
 
           resort.cells.map(function (value, i) {
             var missing = value === null || value === undefined;
@@ -389,7 +441,7 @@
       }).join('');
 
       document.getElementById('mobile-resorts').innerHTML = data.resorts.map(function (resort) {
-        return '<article class="resort-card"><div class="resort-top"><h3>'+esc(resort.name)+'</h3><div class="mini-stat"><strong>'+resort.base+'\" '+(resort.base_chg > 0 ? '↑' : '')+'</strong><span>SNOTEL base</span></div><div class="mini-stat"><strong>'+formatSnow(resort.sf6d)+'\"</strong><span>SF 6-day</span></div></div><div class="forecast-grid">'+
+        return '<article class="resort-card"><div class="resort-top"><h3>'+esc(resort.name)+'</h3><div class="mini-stat"><strong>'+(resort.base === null || resort.base === undefined ? 'n/a' : resort.base+'\" '+(resort.base_chg > 0 ? '↑' : ''))+'</strong><span>SNOTEL base</span></div><div class="mini-stat"><strong>'+formatSnow(resort.sf6d)+'\"</strong><span>SF 6-day</span></div></div><div class="forecast-grid">'+
           resort.cells.map(function (value, i) {
             var day = data.days[i].split(' ');
             var wx = resort.wx && resort.wx[i];
@@ -452,8 +504,8 @@
         else img.addEventListener('error', markFailed);
       });
 
-      var tabs = { resorts: document.getElementById('tab-resorts'), roads: document.getElementById('tab-roads'), stakes: document.getElementById('tab-stakes') };
-      var panels = { resorts: document.getElementById('resorts-panel'), roads: document.getElementById('roads-panel'), stakes: document.getElementById('stakes-panel') };
+      var tabs = { resorts: document.getElementById('tab-resorts'), roads: document.getElementById('tab-roads'), stakes: document.getElementById('tab-stakes'), avalanche: document.getElementById('tab-avalanche') };
+      var panels = { resorts: document.getElementById('resorts-panel'), roads: document.getElementById('roads-panel'), stakes: document.getElementById('stakes-panel'), avalanche: document.getElementById('avalanche-panel') };
       function showView(name, updateHash) {
         Object.keys(tabs).forEach(function (key) {
           tabs[key].setAttribute('aria-selected', key === name ? 'true' : 'false');
@@ -464,8 +516,122 @@
       tabs.resorts.addEventListener('click', function () { showView('resorts', true); });
       tabs.roads.addEventListener('click', function () { showView('roads', true); });
       tabs.stakes.addEventListener('click', function () { showView('stakes', true); });
+      tabs.avalanche.addEventListener('click', function () { showView('avalanche', true); });
       if (location.hash === '#roads') showView('roads', false);
       if (location.hash === '#stakes') showView('stakes', false);
+      if (location.hash === '#avalanche') showView('avalanche', false);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      'use strict';
+      var dataEl = document.getElementById('avalanche-data');
+      var host = document.getElementById('avalanche-content');
+      if (!dataEl || !host) return;
+      var av;
+      try { av = JSON.parse(dataEl.textContent); } catch (e) { return; }
+
+      function esc(value) {
+        return String(value).replace(/[&<>'"]/g, function (char) {
+          return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char];
+        });
+      }
+
+      var LABELS = { 1: 'Low', 2: 'Moderate', 3: 'Considerable', 4: 'High', 5: 'Extreme' };
+      var CENTERS = [
+        { key: 'CAIC', heading: 'COLORADO — Colorado Avalanche Information Center', statementTitle: '⚠ CAIC Statewide Statement' },
+        { key: 'UAC', heading: 'UTAH — Utah Avalanche Center', statementTitle: '⚠ UAC Statement' }
+      ];
+
+      function chip(bandLabel, value) {
+        if (value === null || value === undefined || !LABELS[value]) {
+          return '<span class="chip dn"><b>'+bandLabel+'</b>No Rating</span>';
+        }
+        return '<span class="chip d'+value+'"><b>'+bandLabel+'</b>'+value+' · '+LABELS[value]+'</span>';
+      }
+      function bandRow(dayLabel, day) {
+        day = day || {};
+        return '<div class="band-row"><span class="band-day">'+dayLabel+'</span>'+
+          chip('Above TL', day.upper)+chip('Treeline', day.middle)+chip('Below TL', day.lower)+'</div>';
+      }
+      function maxBand(zone) {
+        var max = 0;
+        [zone.today, zone.tomorrow].forEach(function (day) {
+          if (!day) return;
+          ['upper', 'middle', 'lower'].forEach(function (k) {
+            if (typeof day[k] === 'number' && day[k] > max) max = day[k];
+          });
+        });
+        return max;
+      }
+
+      var alerts = [];
+      CENTERS.forEach(function (cfg) {
+        var center = av.centers && av.centers[cfg.key];
+        if (!center) return;
+        if (center.statement && center.statement.warning) {
+          alerts.push(cfg.key+' statewide statement: Avalanche Warning in effect');
+        }
+        (center.zones || []).forEach(function (zone) {
+          if (zone.warning) alerts.push(zone.name+': Avalanche Warning in effect');
+          if (maxBand(zone) >= 4) alerts.push(zone.name+': High/Extreme danger');
+        });
+      });
+
+      function statementCard(cfg, center) {
+        var s = center.statement;
+        var meta = 'Issued '+esc(s.published || '');
+        if (s.expires) meta += ' · in effect through '+esc(s.expires);
+        return '<div class="av-statement"><h3>'+cfg.statementTitle+'</h3>'+
+          '<p class="av-meta">'+meta+'</p>'+
+          '<p>'+esc(s.text || '')+'</p>'+
+          '<a class="av-link" href="'+esc(center.url)+'" target="_blank" rel="noopener">Full forecast →</a></div>';
+      }
+
+      function zoneCard(zone, center) {
+        var html = '<article class="zone"><h3>'+esc(zone.name)+'</h3>';
+        if (zone.resorts && zone.resorts.length) {
+          html += '<div class="pills">'+zone.resorts.map(function (r) {
+            return '<span class="pill">'+esc(r)+'</span>';
+          }).join('')+'</div>';
+        }
+        if (zone.status === 'none') {
+          html += '<p class="av-none">No current forecast for this zone.</p>';
+        } else {
+          html += bandRow('Today', zone.today)+bandRow('Tomorrow', zone.tomorrow);
+          if (zone.status === 'statement') {
+            html += '<p class="av-note">Covered by the statewide statement above — daily zone ratings have not started.</p>';
+          }
+        }
+        if (zone.bottom_line) html += '<p class="av-bottom">'+esc(zone.bottom_line)+'</p>';
+        if (zone.note) html += '<p class="av-note">'+esc(zone.note)+'</p>';
+        if (zone.published && (zone.status === 'rated' || zone.status === 'norating')) {
+          html += '<p class="av-meta">Issued '+esc(zone.published)+'</p>';
+        }
+        html += '<a class="av-link" href="'+esc(center.url)+'" target="_blank" rel="noopener">Full forecast →</a></article>';
+        return html;
+      }
+
+      var html = '';
+      if (alerts.length) {
+        html += '<div class="av-banner" role="alert"><strong>⚠ Avalanche alerts in effect</strong><ul>'+
+          alerts.map(function (a) { return '<li>'+esc(a)+'</li>'; }).join('')+'</ul></div>';
+      }
+      CENTERS.forEach(function (cfg) {
+        var center = av.centers && av.centers[cfg.key];
+        if (!center) return;
+        html += '<div class="section-head av-head"><h2>'+cfg.heading+'</h2></div>';
+        if (center.statement) html += statementCard(cfg, center);
+        html += '<div class="zone-list">'+(center.zones || []).map(function (zone) {
+          return zoneCard(zone, center);
+        }).join('')+'</div>';
+      });
+      html += '<div class="av-legend"><h3>Danger scale</h3><div class="chips">'+
+        '<span class="chip d1">1 · Low</span><span class="chip d2">2 · Moderate</span><span class="chip d3">3 · Considerable</span><span class="chip d4">4 · High</span><span class="chip d5">5 · Extreme</span><span class="chip dn">No Rating</span>'+
+        '</div></div>';
+      html += '<p class="av-footer">Avalanche data refreshed '+esc(av.refreshed_at || '')+' · Sources: CAIC and Utah Avalanche Center via avalanche.org (National Avalanche Center).</p>';
+      host.innerHTML = html;
     })();
   </script>
 </body>
